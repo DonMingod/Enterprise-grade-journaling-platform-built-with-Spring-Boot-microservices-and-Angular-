@@ -1,0 +1,150 @@
+# ===========================
+# Java / Maven
+# ===========================
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# ===========================
+# IDE - IntelliJ IDEA
+# ===========================
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# ===========================
+# IDE - Eclipse
+# ===========================
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+# ===========================
+# IDE - NetBeans
+# ===========================
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# ===========================
+# IDE - VS Code
+# ===========================
+.vscode/
+
+# ===========================
+# Angular / Node.js
+# ===========================
+# Node modules
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Angular build output
+dist/
+/tmp/
+/out-tsc/
+/bazel-out/
+
+# Angular cache
+.angular/
+.cache/
+
+# ===========================
+# macOS
+# ===========================
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ===========================
+# Windows
+# ===========================
+Thumbs.db
+Thumbs.db:encryptable
+ehthumbs.db
+ehthumbs_vista.db
+*.stackdump
+[Dd]esktop.ini
+$RECYCLE.BIN/
+*.cab
+*.msi
+*.msix
+*.msm
+*.msp
+*.lnk
+
+# ===========================
+# Linux
+# ===========================
+*~
+.fuse_hidden*
+.directory
+.Trash-*
+.nfs*
+
+# ===========================
+# Logs
+# ===========================
+*.log
+logs/
+*.log.*
+log/
+
+# ===========================
+# Compiled files
+# ===========================
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+
+# ===========================
+# Package Files
+# ===========================
+*.zip
+*.tar.gz
+*.rar
+
+# ===========================
+# Spring Boot
+# ===========================
+*.pid
+*.gz
+*.original
+
+# ===========================
+# Environment variables
+# ===========================
+.env
+.env.local
+.env.*.local
+
+# ===========================
+# Testing
+# ===========================
+/coverage/
+*.lcov
+.nyc_output
+
+# ===========================
+# Misc
+# ===========================
+.sass-cache/
+connect.lock
+typings/
+libpeerconnection.log
+testem.log
+
