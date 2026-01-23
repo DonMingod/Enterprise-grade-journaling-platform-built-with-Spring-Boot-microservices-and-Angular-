@@ -4,6 +4,7 @@ import com.huisa.dtos.auth.AuthRequest;
 import com.huisa.dtos.auth.AuthResponse;
 import com.huisa.dtos.request.UserRequest;
 import com.huisa.dtos.response.UserResponse;
+import com.huisa.jwtconfig.JwtUtil;
 import com.huisa.model.Role;
 import com.huisa.model.User;
 import com.huisa.model.UserRole;
@@ -19,9 +20,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.stream.Collector;
+
 
 @Service
 @RequiredArgsConstructor
@@ -33,6 +33,7 @@ public class AuthServiceImpl implements AuthService {
     private final UserMapper userMapper;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
+    private final JwtUtil jwtUtil;
 
     @Override
     public AuthResponse login(AuthRequest authRequest) {
@@ -49,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
                 .map(ur -> ur.getRole().getName())
                 .collect(Collectors.toList());
 
-        String token = "TOKEN_JWT_AQUI";
+        String token = jwtUtil.generateToken(user.getUsername(), roles);
 
         return AuthResponse.builder()
                 .id(user.getId())
