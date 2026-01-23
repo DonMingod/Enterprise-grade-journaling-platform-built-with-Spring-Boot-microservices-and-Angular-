@@ -39,7 +39,7 @@ public class User {
     private String lastName;
 
     @Column(nullable = false)
-    private Boolean enabled = true;
+    private Boolean enabled;
 
     @Column(nullable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false)
     private LocalDateTime createdAt;

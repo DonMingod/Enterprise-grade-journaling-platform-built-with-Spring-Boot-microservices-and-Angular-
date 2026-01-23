@@ -7,9 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import java.time.LocalDateTime;
-
 
 
 @Data
@@ -46,12 +44,10 @@ public class DiaryEntry {
     private String tags;
 
     @Column(name = "is_favorite")
-    @Builder.Default
-    private Boolean isFavorite = false;
+    private Boolean isFavorite;
 
     @Column(name = "is_private")
-    @Builder.Default
-    private Boolean isPrivate = true;
+    private Boolean isPrivate;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
