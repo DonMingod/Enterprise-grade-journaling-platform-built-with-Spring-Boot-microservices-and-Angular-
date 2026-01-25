@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -25,20 +26,12 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    private final SecretKey secretKey;
-    private final Long expiration;
+    public static final  String secretKey ="claveSuperSeguraParaJWTyOAuth2_123456789" ;
 
-    public JwtUtil(
-            @Value("${jwt.secret}") String secret,
-            @Value("${jwt.expiration}") Long expiration) {
-        // Validar longitud mínima de la clave (256 bits = 32 bytes)
-        if (secret.length() < 32) {
-            log.warn("JWT secret es demasiado corto. Usando Base64 para generar clave segura.");
-            this.secretKey = Keys.hmacShaKeyFor(Base64.getEncoder().encode(secret.getBytes(StandardCharsets.UTF_8)));
-        } else {
-            this.secretKey = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
-        }
-        this.expiration = expiration;
+    private final Long expiration = 3600000L; // 1 hora
+
+    public Key getSignaturekey() {
+        return Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
     }
 
     public String generateToken(String username, List<String> roles) {
@@ -47,7 +40,7 @@ public class JwtUtil {
                 .subject(username)
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(secretKey, SignatureAlgorithm.HS256)
+                .signWith(getSignaturekey(), SignatureAlgorithm.HS256)
                 .compact();
     }
 
@@ -70,7 +63,7 @@ public class JwtUtil {
 
     private Claims extractAllClaims(String token) {
         return Jwts.parser()
-                .verifyWith(secretKey)
+                .setSigningKey(getSignaturekey())
                 .build()
                 .parseSignedClaims(token)
                 .getPayload();
