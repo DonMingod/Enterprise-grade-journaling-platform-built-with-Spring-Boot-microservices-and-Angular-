@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
        );
 
        userFound.setEmail(userRequest.email());
-       userFound.setUsername(userRequest.userName());
+       userFound.setUsername(userRequest.username());
        userFound.setFirstName(userRequest.firstName());
        userFound.setLastName(userRequest.lastName());
         if (userRequest.password() != null && !userRequest.password().isEmpty()) {

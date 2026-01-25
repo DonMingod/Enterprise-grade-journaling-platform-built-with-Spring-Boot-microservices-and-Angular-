@@ -13,7 +13,7 @@ public record UserRequest(
         String password,
 
         @NotBlank(message = "Username is required")
-        String userName,
+        String username,
 
         String firstName,
 
