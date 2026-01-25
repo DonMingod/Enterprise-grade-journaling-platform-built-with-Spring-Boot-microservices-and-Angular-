@@ -8,6 +8,7 @@ import com.huisa.jwtconfig.JwtUtil;
 import com.huisa.model.Role;
 import com.huisa.model.User;
 import com.huisa.model.UserRole;
+import com.huisa.model.UserRoleId;
 import com.huisa.repository.RoleRepository;
 import com.huisa.repository.UserRepository;
 import com.huisa.repository.UserRoleRepository;
@@ -49,9 +50,7 @@ public class AuthServiceImpl implements AuthService {
         List<String> roles = userRoles.stream()
                 .map(ur -> ur.getRole().getName())
                 .collect(Collectors.toList());
-
         String token = jwtUtil.generateToken(user.getUsername(), roles);
-
         return AuthResponse.builder()
                 .id(user.getId())
                 .token(token)
@@ -64,14 +63,53 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public UserResponse register(UserRequest userRequest) {
+        System.out.println("Registering user: " + userRequest);
         User user = userMapper.toEntity(userRequest);
+        System.out.println("Mapped user entity: " + user);
         user.setPassword(passwordEncoder.encode(userRequest.password()));
         user.setEnabled(true);
         User savedUser = userRepository.save(user);
 
         Role userRole = roleRepository.findByName("ROLE_USER")
                 .orElseThrow(() -> new RuntimeException("Role USER not found"));
-         UserRole userRoleEntity = UserRole.builder()
+
+        // Crear el ID compuesto de forma explícita
+        UserRoleId userRoleId = new UserRoleId(
+                savedUser.getId(),
+                userRole.getId()
+        );
+
+        UserRole userRoleEntity = UserRole.builder()
+                .id(userRoleId)
+                .user(savedUser)
+                .role(userRole)
+                .build();
+        userRoleRepository.save(userRoleEntity);
+        return userMapper.toDto(savedUser);
+    }
+
+
+
+    @Override
+    public UserResponse registerAdmin(UserRequest userRequest) {
+        System.out.println("Registering user: " + userRequest);
+        User user = userMapper.toEntity(userRequest);
+        System.out.println("Mapped user entity: " + user);
+        user.setPassword(passwordEncoder.encode(userRequest.password()));
+        user.setEnabled(true);
+        User savedUser = userRepository.save(user);
+
+        Role userRole = roleRepository.findByName("ROLE_ADMIN")
+                .orElseThrow(() -> new RuntimeException("Role ADMIN not found"));
+
+        // Crear el ID compuesto de forma explícita
+        UserRoleId userRoleId = new UserRoleId(
+                savedUser.getId(),
+                userRole.getId()
+        );
+
+        UserRole userRoleEntity = UserRole.builder()
+                .id(userRoleId)
                 .user(savedUser)
                 .role(userRole)
                 .build();

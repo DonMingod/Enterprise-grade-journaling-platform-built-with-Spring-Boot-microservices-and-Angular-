@@ -91,7 +91,12 @@ public class JwtUtil {
         return false;
     }
 
-    public boolean validateToken(String token) {
-        return validateToken(token, null);
+    public boolean isTokenValid(String token) {
+        try {
+            extractAllClaims(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }

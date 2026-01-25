@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -26,6 +27,7 @@ public class RoleController {
         return ResponseEntity.ok(roleService.getRoleById(id));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<?> createRole(@Valid @RequestBody RoleRequest roleRequest){
         return ResponseEntity.status(HttpStatus.CREATED).body(roleService.createRole(roleRequest));
