@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CurrencyController {
 
-    private  final CurrencyService currencyService;
+    private final CurrencyService currencyService;
 
     @GetMapping("/rates/{baseCurrency}")
     public ResponseEntity<?> getExchangeRates(@PathVariable String baseCurrency) {
@@ -26,9 +26,8 @@ public class CurrencyController {
     }
 
     @GetMapping("/rate")
-    public  ResponseEntity<?> getRate(@RequestParam String from, @RequestParam String to){
-        return ResponseEntity.ok(currencyService.getRate(from,to));
+    public ResponseEntity<?> getRate(@RequestParam String from, @RequestParam String to) {
+        return ResponseEntity.ok(currencyService.getRate(from, to));
     }
-
 
 }

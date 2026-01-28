@@ -1,5 +1,6 @@
 package com.huisa.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,8 +17,11 @@ import java.util.Map;
 @AllArgsConstructor
 public class ExchangeRateResponse implements Serializable {
 
+    @JsonProperty("base_code")
     private String base;
+
     private LocalDate date;
+
     private Map<String, BigDecimal> rates;
 
 }

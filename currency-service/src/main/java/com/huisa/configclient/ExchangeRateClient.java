@@ -1,5 +1,6 @@
 package com.huisa.configclient;
 
+
 import com.huisa.dto.ExchangeRateResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 )
 public interface ExchangeRateClient {
 
-    @GetMapping("/{baseCurrency")
-    ExchangeRateResponse getExchangeRate(@PathVariable String baseCurrency);
+    @GetMapping("/{baseCurrency}")
+    ExchangeRateResponse getExchangeRates(@PathVariable String baseCurrency);
 }
