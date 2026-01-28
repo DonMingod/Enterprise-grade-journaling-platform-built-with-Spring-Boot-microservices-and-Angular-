@@ -1,1 +1,7 @@
-spring.application.name=currency-service
+spring:
+  application:
+    name: currency-service
+
+
+  config:
+    import: optional:configserver:http://localhost:8888

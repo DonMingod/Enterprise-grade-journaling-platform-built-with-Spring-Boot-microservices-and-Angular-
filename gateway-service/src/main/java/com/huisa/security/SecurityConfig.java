@@ -26,6 +26,8 @@ public class SecurityConfig {
                         .pathMatchers(
                                 "/diary-service/diary-entries",
                                 "/auth-service/auth/**",
+                                "/country-service/countries",
+                                "/currency-service/currencies",
                                 "/public/**"
                         ).permitAll()
                         .anyExchange().authenticated()
