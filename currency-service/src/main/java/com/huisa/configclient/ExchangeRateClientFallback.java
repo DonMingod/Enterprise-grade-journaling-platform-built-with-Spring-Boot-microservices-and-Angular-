@@ -14,7 +14,7 @@ import java.util.Map;
 public class ExchangeRateClientFallback  implements  ExchangeRateClient{
 
     @Override
-    public ExchangeRateResponse getExchangeRate(String baseCurrency) {
+    public ExchangeRateResponse getExchangeRates(String baseCurrency) {
 
         Map<String, BigDecimal> defaultRates = new HashMap<>();
         defaultRates.put("USD", BigDecimal.ONE);
