@@ -1,1 +1,7 @@
-spring.application.name=weather-service
+spring:
+  application:
+    name: weather-service
+
+
+  config:
+    import: optional:configserver:http://localhost:8888
