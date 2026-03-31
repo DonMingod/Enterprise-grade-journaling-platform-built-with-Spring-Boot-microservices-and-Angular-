@@ -6,7 +6,7 @@ import lombok.Builder;
 @Builder
 public record AuthRequest(
 
-        @NotBlank(message = "Email or Username must not be blank")
+        @NotBlank(message = "Email oor Username must not be blank")
         String emailOrUsername,
 
         @NotBlank(message = "Password must not be blank or empty")
