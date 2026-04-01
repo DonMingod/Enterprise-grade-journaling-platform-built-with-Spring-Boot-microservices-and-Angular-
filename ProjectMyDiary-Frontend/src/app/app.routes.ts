@@ -16,12 +16,12 @@ export const routes: Routes = [
         {path:'weather',loadChildren:() => import('./features/weather/weather-routing.module').then(m => m.WeatherRoutingModule)},
         {path:'countries',loadChildren:() => import('./features/countries/countries-routing.module').then(m => m.CountriesRoutingModule)},
         {path:'currency',loadChildren:() => import('./features/currency/currency-routing.module').then(m => m.CurrencyRoutingModule)},
-        {
-            path: 'admin',
-            canActivate: [RoleGuard],
-            data:{ roles: ['ADMIN'] },
-          //  loadChildren: () => import('./features/admin/admin-routing.module').then(m => m.AdminRoutingModule)
-        }
+    {
+    path: 'admin',
+    canActivate: [RoleGuard],
+    data: { roles: ['ADMIN'] },
+       loadChildren: () => import('./admin/admin-routing/admin.module').then(m => m.AdminModule)
+     }
     ]
  },
 

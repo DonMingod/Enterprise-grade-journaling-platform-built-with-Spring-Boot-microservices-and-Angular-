@@ -102,7 +102,6 @@ public class AuthServiceImpl implements AuthService {
         Role userRole = roleRepository.findByName("ROLE_ADMIN")
                 .orElseThrow(() -> new RuntimeException("Role ADMIN not found"));
 
-        // Crear el ID compuesto de forma explícita
         UserRoleId userRoleId = new UserRoleId(
                 savedUser.getId(),
                 userRole.getId()
