@@ -4,6 +4,7 @@ import com.huisa.security.util.JwtUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.oauth2.jwt.NimbusReactiveJwtDecoder;
@@ -23,6 +24,21 @@ public class SecurityConfig {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .authorizeExchange(auth -> auth
+                        .pathMatchers(
+                                HttpMethod.POST,
+                                "auth-service/roles/**",
+                                "auth-service/user-roles"
+                        ).hasRole("ADMIN")
+                        .pathMatchers(
+                                HttpMethod.PUT,
+                                "auth-service/roles/**",
+                                "auth-service/user-roles"
+                        ).hasRole("ADMIN")
+                        .pathMatchers(
+                                HttpMethod.DELETE,
+                                "auth-service/roles/**",
+                                "auth-service/user-roles"
+                        ).hasRole("ADMIN")
                         .pathMatchers(
                                 "/diary-service/diary-entries",
                                 "/auth-service/auth/**",
